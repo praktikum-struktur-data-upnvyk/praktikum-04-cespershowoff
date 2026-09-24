@@ -89,22 +89,89 @@ void tutupSemuaTab(CNode*& head) {
 
 // SOAL 1
 bool bukaHalaman(DNode*& head, DNode*& tail, int nomor) {
-    return false;
+    DNode *node_baru = new DNode();
+    node_baru->data=nomor;
+    node_baru->next=nullptr;
+    node_baru->prev=nullptr;
+
+    if(head==nullptr&&tail==nullptr){
+        head=tail=node_baru;
+        return true;
+    } else {
+        tail->next=node_baru;
+        node_baru->prev=tail;
+        tail=node_baru;
+        return true;
+    }
 }
 
 // SOAL 2
 int riwayatMundur(DNode* tail, int* keluaran) {
-    return 0;
+    DNode *temp=tail;
+    int banyak=0;
+    if(tail==nullptr){
+        return 0;
+    } else {
+        while(temp->prev!=nullptr){
+            banyak++;
+            temp = temp->prev;
+        }
+        return banyak;
+    }
 }
 
 // SOAL 3
 bool hapusHalaman(DNode*& head, DNode*& tail, int nomor) {
-    return false;
+    if(head==nullptr&&tail==nullptr){
+        return false;
+    }
+    DNode *hapus = head;
+    while(hapus->next!=nullptr&&hapus->data!=nomor){
+        hapus=hapus->next;
+    }
+
+    if(hapus->data!=nomor){
+        return false;
+    }
+
+    if(hapus==head){
+        head = hapus->next;
+        if(head!=nullptr){
+            head->prev=nullptr;
+        } else {
+            tail=nullptr;
+        }
+    } else if(hapus==tail){
+        tail=hapus->prev;
+        tail->next=nullptr;
+    } else {
+        hapus->prev->next=hapus->next;
+        hapus->next->prev=hapus->prev;
+    }
+
+    delete hapus;
+    return true;
 }
 
 // SOAL 4
 bool bukaTab(CNode*& head, int nomor) {
-    return false;
+    CNode *node_baru = new CNode();
+    node_baru->data=nomor;
+    node_baru->next=nullptr;
+
+    if(head==nullptr){
+        head=node_baru;
+        node_baru->next=head;
+        return true;
+    } else {
+        CNode *temp = head;
+        do{
+            temp=temp->next;
+        }while(temp!=head);
+        temp->next=node_baru;
+        node_baru->next=head;
+        return true;
+    }
 }
 
 // =============================================================================

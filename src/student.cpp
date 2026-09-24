@@ -111,13 +111,16 @@ int riwayatMundur(DNode* tail, int* keluaran) {
     int banyak=0;
     if(tail==nullptr){
         return 0;
-    } else {
-        while(temp->prev!=nullptr){
-            banyak++;
-            temp = temp->prev;
+    } 
+    DNode *temp=tail;
+    while(temp!=nullptr){
+        if(keluaran!=nullptr){
+            keluaran[banyak]=temp->data;
         }
-        return banyak;
+        banyak++;
+        temp=temp->next;
     }
+    return banyak;
 }
 
 // SOAL 3
@@ -165,9 +168,9 @@ bool bukaTab(CNode*& head, int nomor) {
         return true;
     } else {
         CNode *temp = head;
-        do{
+        while(temp->next!=head){
             temp=temp->next;
-        }while(temp!=head);
+        }
         temp->next=node_baru;
         node_baru->next=head;
         return true;

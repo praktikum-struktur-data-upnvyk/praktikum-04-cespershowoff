@@ -112,7 +112,6 @@ int riwayatMundur(DNode* tail, int* keluaran) {
     if(tail==nullptr){
         return 0;
     } 
-    DNode *temp=tail;
     while(temp!=nullptr){
         if(keluaran!=nullptr){
             keluaran[banyak]=temp->data;
